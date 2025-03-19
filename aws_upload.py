@@ -63,7 +63,12 @@ def getKeyPayload(filePath,channel):
 	lines = open(filePath).readlines()
 	
 	#Extract header to be used as key and latestDataRow as value for httppost.
-	variables = lines[0].strip().split(",")
+	#If file is empty, then pass data stripping. 
+	try:
+		variables = lines[0].strip().split(",")
+	except:
+		return None
+		
 	#Remove any paranethesis from variable names to remove changes in units from nulabs
 	for i in range(len(variables)):
 		variables[i] = variables[i].split('(')[0]
